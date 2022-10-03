@@ -10,8 +10,8 @@ mongoose
   .catch((error) => console.log("Connection error", error));
 
 const productRoutes = require("./api/routes/product");
-
 const orderRoutes = require("./api/routes/order");
+const userRoutes = require("./api/routes/user");
 
 app.use(morgan("dev"));
 
@@ -40,6 +40,7 @@ app.use((req, res, next) => {
 
 app.use("/products", productRoutes);
 app.use("/order", orderRoutes);
+app.use("/user", userRoutes);
 
 app.use("/upload", express.static("upload"));
 app.use((req, res, next) => {
