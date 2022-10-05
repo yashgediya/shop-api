@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 const bcrypt = require("bcrypt");
-const { response } = require("../../app");
 
 router.post("/signup", (req, res) => {
   User.find({ email: req.body.email })
@@ -24,7 +22,7 @@ router.post("/signup", (req, res) => {
             });
             user
               .save()
-              .then((doc) => res.status(200).send({ message: "User Created" }))
+              .then(() => res.status(200).send({ message: "User Created" }))
               .catch((err) => res.status(500).send({ error: err }));
           }
         });
@@ -70,7 +68,7 @@ router.delete("/:userId", (req, res) => {
   const userId = req.params.userId;
   User.remove({ _id: userId })
     .exec()
-    .then((respose) => {
+    .then(() => {
       res.status(200).send({ message: "User deleted" });
     })
     .catch((err) => {
